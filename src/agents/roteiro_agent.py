@@ -33,7 +33,8 @@ agent = Agent(
 )
 
 
-def gerar_roteiro(titulo: str, tipo: TipoRoteiro = TipoRoteiro, referencias: list[str] = None) -> tuple[RoteiroBiblico, int]:
+def gerar_roteiro(titulo: str, tipo: TipoRoteiro = TipoRoteiro, referencias: list[str] = None) -> tuple[
+    RoteiroBiblico, int]:
     """
     Gera um roteiro bíblico baseado no tema e tipo especificados
 

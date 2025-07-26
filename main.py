@@ -1,27 +1,25 @@
-import os
 from dotenv import load_dotenv
 
-from src.models import TipoRoteiro
 from src.agents.roteiro_agent import gerar_roteiro
 from src.agents.youtube_info_agent import gerar_info_video_youtube
+from src.models import TipoRoteiro
 
 # Carregar variáveis de ambiente do arquivo .env
 load_dotenv()
 
 if __name__ == "__main__":
-
     # Gerar roteiro bíblico
     roteiro, roteiro_id = gerar_roteiro("Ansiedade", TipoRoteiro.LONGO)
-    
+
     # Gerar informações do vídeo para YouTube
     info_video = gerar_info_video_youtube(roteiro, roteiro_id)
-    
+
     print(f"\n=== ROTEIRO GERADO ===")
     print(f"ID: {roteiro_id}")
     print(f"Tema: {roteiro.tema}")
     print(f"Tipo: {roteiro.tipo}")
     print(f"Duração: {roteiro.duracao_estimada}")
-    
+
     print(f"\n=== INFORMAÇÕES DO VÍDEO ===")
     print(f"Título: {info_video.titulo}")
     print(f"Tags: {', '.join(info_video.tags)}")

@@ -3,8 +3,8 @@ from typing import Dict, Any, List, Optional
 
 import requests
 from agno.tools import Toolkit
-from loguru import logger
 from bs4 import BeautifulSoup
+from loguru import logger
 
 BASE_URL = "https://www.bibliaonline.com.br/{translation}/{slug}/{chapter}"
 

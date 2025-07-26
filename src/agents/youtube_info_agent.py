@@ -42,7 +42,7 @@ def gerar_info_video_youtube(roteiro: RoteiroBiblico, roteiro_id: int = None) ->
         InfoVideoYouTube: Objeto com as informações do vídeo
     """
     logger.info(f"Gerando informações do vídeo para roteiro: tema='{roteiro.tema}', tipo='{roteiro.tipo}'")
-    
+
     prompt = f"""
     Com base no seguinte roteiro bíblico, crie informações otimizadas para um vídeo do YouTube:
 
@@ -66,9 +66,9 @@ def gerar_info_video_youtube(roteiro: RoteiroBiblico, roteiro_id: int = None) ->
 
     info_video: InfoVideoYouTube = agent.run(prompt).content
     logger.debug(f"Informações do vídeo geradas: {info_video}")
-    
+
     if roteiro_id:
         save_info_video_sqlite(info_video, roteiro_id)
         logger.success(f"Informações do vídeo salvas no banco SQLite")
-    
-    return info_video 
+
+    return info_video

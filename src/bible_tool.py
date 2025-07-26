@@ -62,28 +62,30 @@ class BibleLookupTool(Toolkit):
         try:
             livro, cap, v_ini, v_fim = self._parse_ref(referencia)
             logger.debug(f"Referência parseada: livro={livro}, capítulo={cap}, v_ini={v_ini}, v_fim={v_fim}")
+            url = BASE_URL.format(translation=translation, slug=livro, chapter=cap)
+            logger.info(f"GET {url}")
+            try:
+                raw_html = self._download(url)
+            except requests.exceptions.RequestException as e:
+                logger.error(f"Erro ao baixar página da bíblia: {e}")
+                return {"error": "Erro de rede ou API ao buscar versículo."}
+            try:
+                verses = self._extract_verses(raw_html, v_ini, v_fim)
+                logger.debug(f"Versículos extraídos: {len(verses)} encontrados")
+            except Exception as e:
+                logger.error(f"Erro ao extrair versículos: {e}")
+                return {"error": "Erro ao processar resposta da bíblia online."}
+            if not verses:
+                return {"error": "Versículo(s) não encontrado(s)."}
+            full_text = " ".join(v["text"] for v in verses)
+            ref_fmt = self._format_reference(livro, cap, v_ini, v_fim)
+            logger.info(f"Consulta finalizada: {ref_fmt}")
+            return {"reference": ref_fmt, "text": full_text, "verses": verses}
+        except ValueError:
+            return {"error": "Formato inválido. Ex.: 'rm5', 'rm5:3', 'rm5:3-5'"}
         except Exception as e:
-            logger.error(f"Erro ao interpretar referência '{referencia}': {e}")
-            raise
-        url = BASE_URL.format(translation=translation, slug=livro, chapter=cap)
-        logger.info(f"GET {url}")
-
-        try:
-            raw_html = self._download(url)
-        except Exception as e:
-            logger.error(f"Erro ao baixar página da bíblia: {e}")
-            raise
-        try:
-            verses = self._extract_verses(raw_html, v_ini, v_fim)
-            logger.debug(f"Versículos extraídos: {len(verses)} encontrados")
-        except Exception as e:
-            logger.error(f"Erro ao extrair versículos: {e}")
-            raise
-        full_text = " ".join(v["text"] for v in verses)
-
-        ref_fmt = self._format_reference(livro, cap, v_ini, v_fim)
-        logger.info(f"Consulta finalizada: {ref_fmt}")
-        return {"reference": ref_fmt, "text": full_text, "verses": verses}
+            logger.error(f"Erro inesperado: {e}")
+            return {"error": "Erro inesperado ao buscar versículo."}
 
     # ------------------------- Métodos privados ------------------------ #
     @classmethod

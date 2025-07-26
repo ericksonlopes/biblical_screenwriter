@@ -87,6 +87,63 @@ agno_roteirista_biblico/
 └── roteiros.sqlite3       # Banco de dados SQLite
 ```
 
+## 🧪 Testes
+
+O projeto inclui uma suíte completa de testes automatizados para garantir a qualidade do código.
+
+### Instalação das Dependências de Teste
+
+```bash
+# Usando uv (recomendado)
+uv add --dev pytest pytest-cov pytest-mock
+
+# Ou usando pip
+pip install pytest pytest-cov pytest-mock
+```
+
+### Executando os Testes
+
+```bash
+# Executar todos os testes
+python -m pytest
+
+# Executar testes específicos
+python -m pytest tests/test_models.py
+python -m pytest tests/test_utils.py
+python -m pytest tests/test_agents.py
+
+# Executar com cobertura
+python -m pytest --cov=src --cov-report=html
+
+# Executar com saída detalhada
+python -m pytest -v
+
+# Usar o script de conveniência
+python run_tests.py --coverage
+```
+
+### Estrutura dos Testes
+
+```
+tests/
+├── conftest.py              # Fixtures compartilhadas
+├── test_models.py           # Testes dos modelos de dados
+├── test_utils.py            # Testes das funções utilitárias
+├── test_agents.py           # Testes dos agentes
+├── test_integration.py      # Testes de integração
+├── test_bible_tool.py       # Testes da ferramenta bíblica
+└── README.md                # Documentação dos testes
+```
+
+### Tipos de Testes
+
+- **Testes Unitários**: Testam funções e classes isoladamente
+- **Testes de Integração**: Testam a interação entre componentes
+- **Testes de Agentes**: Testam os agentes de IA com mocks
+- **Testes da Ferramenta Bíblica**: Testam busca e parsing de versículos
+
+Para mais detalhes, consulte [tests/README.md](tests/README.md).
+
 ## 🤖 Agentes IA
 
 ### Roteiro Agent

@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 
 from src.agents.roteiro_agent import gerar_roteiro
-from src.agents.youtube_info_agent import gerar_info_video_youtube
+from src.agents.youtube_detail_agent import gerar_detail_video_youtube
 from src.models import TipoRoteiro
 
 # Carregar variáveis de ambiente do arquivo .env
@@ -12,7 +12,7 @@ if __name__ == "__main__":
     roteiro, roteiro_id = gerar_roteiro("Ansiedade", TipoRoteiro.LONGO)
 
     # Gerar informações do vídeo para YouTube
-    info_video = gerar_info_video_youtube(roteiro, roteiro_id)
+    info_video = gerar_detail_video_youtube(roteiro, roteiro_id)
 
     print(f"\n=== ROTEIRO GERADO ===")
     print(f"ID: {roteiro_id}")

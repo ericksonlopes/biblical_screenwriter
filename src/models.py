@@ -22,7 +22,7 @@ class RoteiroBiblico(BaseModel):
     referencias: list[str] = Field(default_factory=list, description="Referências sugeridas para o agente usar")
 
 
-class InfoVideoYouTube(BaseModel):
+class DetailVideoYouTube(BaseModel):
     titulo: str = Field(..., description="Título chamativo para o vídeo do YouTube")
     descricao: str = Field(..., description="Descrição completa do vídeo para o YouTube")
     tags: list[str] = Field(..., description="Tags relevantes para SEO do YouTube")

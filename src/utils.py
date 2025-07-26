@@ -5,7 +5,7 @@ from pathlib import Path
 
 from loguru import logger
 
-from src.models import RoteiroBiblico, InfoVideoYouTube
+from src.models import RoteiroBiblico, DetailVideoYouTube
 
 OUT_DIR = Path(__file__).resolve().parent.parent / "roteiros_json"
 OUT_DIR.mkdir(exist_ok=True)
@@ -69,7 +69,7 @@ def save_roteiro_sqlite(roteiro: RoteiroBiblico, db_path: str = None) -> int:
     return roteiro_id
 
 
-def save_info_video_sqlite(info_video: InfoVideoYouTube, roteiro_id: int, db_path: str = None) -> None:
+def save_info_video_sqlite(info_video: DetailVideoYouTube, roteiro_id: int, db_path: str = None) -> None:
     """
     Salva as informações do vídeo do YouTube em um banco SQLite.
     """

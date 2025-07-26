@@ -2,7 +2,7 @@ from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 from loguru import logger
 
-from src.models import InfoVideoYouTube, RoteiroBiblico
+from src.models import DetailVideoYouTube, RoteiroBiblico
 from src.utils import save_info_video_sqlite
 
 MODEL_ID = "gpt-4o-mini"
@@ -24,13 +24,13 @@ Siga estas diretrizes:
 agent = Agent(
     model=OpenAIChat(id=MODEL_ID, temperature=0.7),
     description="Agente gerador de informações para vídeos do YouTube",
-    response_model=InfoVideoYouTube,
+    response_model=DetailVideoYouTube,
     instructions=[system_prompt],
     show_tool_calls=False
 )
 
 
-def gerar_info_video_youtube(roteiro: RoteiroBiblico, roteiro_id: int = None) -> InfoVideoYouTube:
+def gerar_detail_video_youtube(roteiro: RoteiroBiblico, roteiro_id: int = None) -> DetailVideoYouTube:
     """
     Gera informações otimizadas para vídeo do YouTube baseadas no roteiro bíblico.
 
@@ -39,7 +39,7 @@ def gerar_info_video_youtube(roteiro: RoteiroBiblico, roteiro_id: int = None) ->
         roteiro_id (int, opcional): ID do roteiro no banco de dados
 
     Returns:
-        InfoVideoYouTube: Objeto com as informações do vídeo
+        DetailVideoYouTube: Objeto com as informações do vídeo
     """
     logger.info(f"Gerando informações do vídeo para roteiro: tema='{roteiro.tema}', tipo='{roteiro.tipo}'")
 
@@ -64,7 +64,7 @@ def gerar_info_video_youtube(roteiro: RoteiroBiblico, roteiro_id: int = None) ->
     Foque em engajamento e conversão para inscritos no canal.
     """
 
-    info_video: InfoVideoYouTube = agent.run(prompt).content
+    info_video: DetailVideoYouTube = agent.run(prompt).content
     logger.debug(f"Informações do vídeo geradas: {info_video}")
 
     if roteiro_id:

@@ -51,14 +51,14 @@ O **Agno Roteirista Bíblico** é uma ferramenta que combina inteligência artif
 
 ```python
 from src.agents.roteiro_agent import gerar_roteiro
-from src.agents.youtube_info_agent import gerar_info_video_youtube
+from src.agents.youtube_detail_agent import gerar_detail_video_youtube
 from src.models import TipoRoteiro
 
 # Gerar um roteiro longo sobre "Ansiedade"
 roteiro, roteiro_id = gerar_roteiro("Ansiedade", TipoRoteiro.LONGO)
 
 # Gerar informações otimizadas para YouTube
-info_video = gerar_info_video_youtube(roteiro, roteiro_id)
+info_video = gerar_detail_video_youtube(roteiro, roteiro_id)
 
 print(f"Título: {info_video.titulo}")
 print(f"Tags: {info_video.tags}")
@@ -137,7 +137,7 @@ agno_roteirista_biblico/
 }
 ```
 
-### InfoVideoYouTube
+### DetailVideoYouTube
 ```python
 {
     "titulo": "Título otimizado para SEO",

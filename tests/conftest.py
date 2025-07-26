@@ -1,10 +1,10 @@
 """
 Fixtures para os testes do projeto.
 """
-import pytest
 import tempfile
 from pathlib import Path
-from datetime import datetime
+
+import pytest
 
 from src.models import RoteiroBiblico, DetailVideoYouTube, TipoRoteiro
 
@@ -51,9 +51,9 @@ def temp_db_path():
     """Fixture que retorna um caminho temporário para banco de dados."""
     with tempfile.NamedTemporaryFile(suffix='.sqlite3', delete=False) as f:
         db_path = f.name
-    
+
     yield db_path
-    
+
     # Limpeza: remove o arquivo temporário
     try:
         Path(db_path).unlink()
@@ -65,12 +65,12 @@ def temp_db_path():
 def temp_json_dir():
     """Fixture que retorna um diretório temporário para arquivos JSON."""
     temp_dir = Path(tempfile.mkdtemp())
-    
+
     yield temp_dir
-    
+
     # Limpeza: remove o diretório temporário
     import shutil
     try:
         shutil.rmtree(temp_dir)
     except FileNotFoundError:
-        pass 
+        pass

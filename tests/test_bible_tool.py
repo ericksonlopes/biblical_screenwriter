@@ -1,8 +1,8 @@
 """
 Testes para a ferramenta de busca bíblica.
 """
-import pytest
 from unittest.mock import patch, MagicMock
+
 import requests
 
 from src.bible_tool import BibleLookupTool
@@ -10,13 +10,13 @@ from src.bible_tool import BibleLookupTool
 
 class TestBibleLookupTool:
     """Testes para a ferramenta BibleLookupTool."""
-    
+
     def test_bible_lookup_tool_instancia(self):
         """Testa se a ferramenta pode ser instanciada."""
         tool = BibleLookupTool()
         assert tool is not None
         assert hasattr(tool, 'lookup_verse')
-    
+
     @patch('requests.get')
     def test_lookup_verse_sucesso(self, mock_get):
         """Testa busca bem-sucedida de versículo."""
@@ -25,7 +25,7 @@ class TestBibleLookupTool:
         mock_response.status_code = 200
         mock_response.text = '''<span class="v">16</span><span class="t">Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito...</span>'''
         mock_get.return_value = mock_response
-        
+
         tool = BibleLookupTool()
         result = tool.lookup_verse("jo3:16")
 

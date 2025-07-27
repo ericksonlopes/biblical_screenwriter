@@ -1,6 +1,5 @@
 from datetime import datetime
 from enum import Enum
-from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -16,10 +15,12 @@ class RoteiroBiblico(BaseModel):
     roteiro: str = Field(..., description="Texto integral do roteiro")
     versiculos_utilizados: list[str] = Field(..., description="Referências bíblicas usadas")
     duracao_estimada: str = Field(..., description="Ex.: '3–6 minutos' ou '≤60 segundos'")
-    formato: Literal["Reflexão devocional"] = Field(default="Reflexão devocional",
-                                                    description="Formato fixo do conteúdo")
     tipo: TipoRoteiro
     referencias: list[str] = Field(default_factory=list, description="Referências sugeridas para o agente usar")
+    postagem_comunidade: str = Field(
+        default="",
+        description="Texto para postagem na comunidade do YouTube, chamando a atenção para o vídeo de forma engajante"
+    )
 
 
 class DetailVideoYouTube(BaseModel):

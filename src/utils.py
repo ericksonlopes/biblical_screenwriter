@@ -34,6 +34,14 @@ def save_roteiro_sqlite(roteiro: RoteiroBiblico, db_path: str = None) -> int:
         db_path = str((Path(__file__).resolve().parent.parent / "roteiros.sqlite3"))
     conn = sqlite3.connect(db_path)
     cur = conn.cursor()
+    
+    # Migração: adicionar campo postagem_comunidade se não existir
+    try:
+        cur.execute("ALTER TABLE roteiros_biblicos ADD COLUMN postagem_comunidade TEXT")
+        logger.info("Campo postagem_comunidade adicionado à tabela roteiros_biblicos")
+    except sqlite3.OperationalError:
+        # Campo já existe, não faz nada
+        pass
     cur.execute('''
                 CREATE TABLE IF NOT EXISTS roteiros_biblicos
                 (
@@ -43,14 +51,14 @@ def save_roteiro_sqlite(roteiro: RoteiroBiblico, db_path: str = None) -> int:
                     roteiro               TEXT,
                     versiculos_utilizados TEXT,
                     duracao_estimada      TEXT,
-                    formato               TEXT,
                     tipo                  TEXT,
-                    referencias           TEXT
+                    referencias           TEXT,
+                    postagem_comunidade   TEXT
                 )
                 ''')
     cur.execute('''
                 INSERT INTO roteiros_biblicos (tema, data_criacao, roteiro, versiculos_utilizados, duracao_estimada,
-                                               formato, tipo, referencias)
+                                               tipo, referencias, postagem_comunidade)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 ''', (
                     roteiro.tema,
@@ -58,9 +66,9 @@ def save_roteiro_sqlite(roteiro: RoteiroBiblico, db_path: str = None) -> int:
                     roteiro.roteiro,
                     json.dumps(roteiro.versiculos_utilizados, ensure_ascii=False),
                     roteiro.duracao_estimada,
-                    roteiro.formato,
                     roteiro.tipo.value if hasattr(roteiro.tipo, 'value') else str(roteiro.tipo),
-                    json.dumps(roteiro.referencias, ensure_ascii=False)
+                    json.dumps(roteiro.referencias, ensure_ascii=False),
+                    roteiro.postagem_comunidade
                 ))
     roteiro_id = cur.lastrowid
     conn.commit()
@@ -77,6 +85,8 @@ def save_info_video_sqlite(info_video: DetailVideoYouTube, roteiro_id: int, db_p
         db_path = str((Path(__file__).resolve().parent.parent / "roteiros.sqlite3"))
     conn = sqlite3.connect(db_path)
     cur = conn.cursor()
+    
+
     cur.execute('''
                 CREATE TABLE IF NOT EXISTS info_videos_youtube
                 (

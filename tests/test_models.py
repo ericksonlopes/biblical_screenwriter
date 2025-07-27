@@ -41,7 +41,6 @@ class TestRoteiroBiblico:
         assert len(roteiro.versiculos_utilizados) == 2
         assert roteiro.duracao_estimada == "3-6 minutos"
         assert roteiro.tipo == TipoRoteiro.LONGO
-        assert roteiro.formato == "Reflexão devocional"
         assert isinstance(roteiro.data_criacao, datetime)
 
     def test_roteiro_biblico_valores_padrao(self):
@@ -54,8 +53,8 @@ class TestRoteiroBiblico:
             tipo=TipoRoteiro.SHORT
         )
 
-        assert roteiro.formato == "Reflexão devocional"
         assert roteiro.referencias == []
+        assert roteiro.postagem_comunidade == ""
         assert isinstance(roteiro.data_criacao, datetime)
 
     def test_roteiro_biblico_com_referencias(self):
@@ -71,6 +70,20 @@ class TestRoteiroBiblico:
         )
 
         assert roteiro.referencias == referencias
+
+    def test_roteiro_biblico_com_postagem_comunidade(self):
+        """Testa a criação com postagem da comunidade personalizada."""
+        postagem = "🙏 Acabei de publicar um vídeo sobre conforto! Como você encontra paz em momentos difíceis? Compartilhe sua experiência nos comentários! ✨"
+        roteiro = RoteiroBiblico(
+            tema="Conforto",
+            roteiro="Roteiro sobre conforto...",
+            versiculos_utilizados=["Salmo 23:1-6"],
+            duracao_estimada="3-6 minutos",
+            tipo=TipoRoteiro.LONGO,
+            postagem_comunidade=postagem
+        )
+
+        assert roteiro.postagem_comunidade == postagem
 
     def test_roteiro_biblico_serializacao(self):
         """Testa serialização do modelo."""

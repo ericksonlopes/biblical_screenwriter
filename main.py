@@ -9,7 +9,7 @@ load_dotenv()
 
 if __name__ == "__main__":
     # Gerar roteiro bíblico
-    roteiro, roteiro_id = gerar_roteiro("Ansiedade", TipoRoteiro.LONGO)
+    roteiro, roteiro_id = gerar_roteiro("fujam da imoralidade sexual", TipoRoteiro.LONGO)
 
     # Gerar informações do vídeo para YouTube
     info_video = gerar_detail_video_youtube(roteiro, roteiro_id)

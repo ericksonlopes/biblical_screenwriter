@@ -71,7 +71,8 @@ class TestSaveRoteiroSqlite:
             versiculos_utilizados=["João 3:16", "Romanos 8:28"],
             duracao_estimada="3-6 minutos",
             tipo=TipoRoteiro.LONGO,
-            referencias=["Salmo 23"]
+            referencias=["Salmo 23"],
+            postagem_comunidade="🙏 Acabei de publicar um vídeo sobre ansiedade! Como você lida com momentos de preocupação? Compartilhe suas estratégias nos comentários! ✨"
         )
 
         roteiro_id = save_roteiro_sqlite(roteiro, str(db_path))
@@ -92,9 +93,10 @@ class TestSaveRoteiroSqlite:
         assert row[3] == "Conteúdo do roteiro"  # roteiro
         assert json.loads(row[4]) == ["João 3:16", "Romanos 8:28"]  # versiculos_utilizados
         assert row[5] == "3-6 minutos"  # duracao_estimada
-        assert row[6] == "Reflexão devocional"  # formato
-        assert row[7] == "Video"  # tipo
-        assert json.loads(row[8]) == ["Salmo 23"]  # referencias
+        assert row[6] == "Video"  # tipo
+        assert json.loads(row[7]) == ["Salmo 23"]  # referencias
+        assert row[
+                   8] == "🙏 Acabei de publicar um vídeo sobre ansiedade! Como você lida com momentos de preocupação? Compartilhe suas estratégias nos comentários! ✨"  # postagem_comunidade
 
     def test_save_roteiro_sqlite_multiplos_registros(self, tmp_path):
         """Testa se múltiplos roteiros são salvos com IDs incrementais."""

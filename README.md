@@ -11,6 +11,7 @@ O **Agno Roteirista Bíblico** é uma ferramenta que combina inteligência artif
 - **Geração de Roteiros Bíblicos**: Cria roteiros baseados em temas específicos
 - **Busca de Versículos**: Integração com Bíblia Online para buscar versículos reais
 - **Otimização para YouTube**: Gera títulos, descrições, tags e hashtags otimizadas
+- **Postagens da Comunidade**: Cria postagens engajantes para a comunidade do YouTube
 - **Dois Formatos**: Suporte para vídeos longos (4-7 min) e shorts (≤60s)
 - **Armazenamento**: Salva roteiros em JSON e banco SQLite
 - **Thumbnail Prompts**: Gera prompts para criação de thumbnails atrativas
@@ -154,6 +155,7 @@ Para mais detalhes, consulte [tests/README.md](tests/README.md).
   - Foco na leitura de versículos
   - Evita interpretações complexas
   - Inclui convite para inscrição no canal
+  - Gera postagens engajantes para a comunidade do YouTube
 
 ### YouTube Info Agent
 - **Modelo**: GPT-4o-mini
@@ -190,7 +192,8 @@ Para mais detalhes, consulte [tests/README.md](tests/README.md).
     "versiculos_utilizados": ["Filipenses 4:6-7", "1 Pedro 5:7"],
     "duracao_estimada": "4-7 minutos",
     "tipo": "Video",  # ou "Short"
-    "formato": "Reflexão devocional"
+    "referencias": ["Salmo 23", "Isaías 41:10"],
+    "postagem_comunidade": "🙏 Acabei de publicar um vídeo sobre ansiedade! Como você lida com momentos de preocupação? Compartilhe suas estratégias nos comentários! ✨"
 }
 ```
 
@@ -226,6 +229,27 @@ Para mais detalhes, consulte [tests/README.md](tests/README.md).
 - Tabelas: `roteiros`, `info_videos`
 - Relacionamento: `roteiro_id` → `info_video`
 
+## 📱 Postagens da Comunidade
+
+O sistema gera automaticamente postagens engajantes para a comunidade do YouTube que:
+
+### ✨ Características das Postagens
+- **Linguagem convidativa**: Tom acolhedor e pastoral
+- **Perguntas engajantes**: Convida espectadores a compartilhar experiências
+- **Emojis apropriados**: Torna a postagem mais atrativa e visual
+- **Foco no tema**: Menciona o assunto do vídeo de forma atrativa
+- **Chamada para ação**: Convida interação e compartilhamento
+
+### 🎯 Exemplo de Postagem
+```
+🙏 Acabei de publicar um vídeo sobre ansiedade! 
+Como você lida com momentos de preocupação? 
+Compartilhe suas estratégias nos comentários! ✨
+```
+
+### 🔧 Como Usar
+As postagens são geradas automaticamente junto com o roteiro e podem ser acessadas através do campo `postagem_comunidade` no modelo `RoteiroBiblico`.
+
 ## 🎨 Exemplo de Saída
 
 ### Roteiro Gerado
@@ -241,6 +265,10 @@ Título: 😰 Ansiedade? A Bíblia tem a resposta que você precisa!
 Tags: ansiedade, bíblia, paz, cristão, devocional
 Hashtags: #ansiedade #paz #bíblia #cristão
 Thumbnail Prompt: Uma pessoa em paz, com luz dourada, texto "Ansiedade? A Bíblia responde"
+
+=== POSTAGEM DA COMUNIDADE ===
+🙏 Acabei de publicar um vídeo sobre ansiedade! Como você lida com momentos de preocupação? 
+Compartilhe suas estratégias nos comentários! ✨
 ```
 
 ## 🤝 Contribuindo

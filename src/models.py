@@ -17,6 +17,10 @@ class RoteiroBiblico(BaseModel):
     duracao_estimada: str = Field(..., description="Ex.: '3–6 minutos' ou '≤60 segundos'")
     tipo: TipoRoteiro
     referencias: list[str] = Field(default_factory=list, description="Referências sugeridas para o agente usar")
+    postagem_comunidade: str = Field(
+        default="",
+        description="Texto para postagem na comunidade do YouTube, chamando a atenção para o vídeo de forma engajante"
+    )
 
 
 class DetailVideoYouTube(BaseModel):

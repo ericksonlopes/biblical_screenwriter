@@ -94,23 +94,22 @@ def gerar_roteiro(titulo: str, tipo: TipoRoteiro = TipoRoteiro, referencias: lis
         f"Gere um roteiro {tipo.value} sobre o tema '{titulo}' seguindo estas diretrizes:\n\n"
 
         "FORMATO DO ROTEIRO:\n"
-        "- Para vídeos longos: 700-1000 palavras (4-7 min)\n"
+        "- Para vídeos longos: 2000-4000 palavras \n"
         "- Para shorts: 150-220 palavras (≤60 s)\n\n"
-
+        
+        "FORMATAÇÃO:\n"
+        "- Apresente cada versículo no formato 'Livro Capítulo:Versículo(s)'\n"
+        "- Para versículos consecutivos, use o formato 'Livro Capítulo:Versículo-Versículo'\n"
+        "- Agrupe e leia em sequência contínua todos os versículos consecutivos"
+        "- Mantenha versículos consecutivos unidos em um único bloco - Esta é uma regra fundamental\n"
+        "- Separe blocos diferentes apenas com uma linha em branco\n\n"
+        
         "REGRAS ESTRITAS:\n"
         "- Use a ferramenta lookup_verse para buscar versículos relevantes ao tema\n"
         "- Apresente APENAS os versículos bíblicos, sem NENHUM texto adicional\n"
         "- NÃO inclua introduções, explicações, interpretações ou comentários\n"
         "- NÃO adicione transições ou textos conectivos entre os versículos\n"
-        "- NÃO inclua reflexões ou conclusões\n\n"
-
-        "FORMATAÇÃO:\n"
-        "- Apresente cada versículo no formato 'Livro Capítulo:Versículo(s)'\n"
-        "- Para versículos consecutivos, use o formato 'Livro Capítulo:Versículo-Versículo'\n"
-        "- Agrupe e leia em sequência contínua todos os versículos consecutivos"
-        "- Mantenha versículos consecutivos unidos em um único bloco\n"
-        "- Separe blocos diferentes apenas com uma linha em branco\n\n"
-
+        
         "ESTRUTURA:\n"
         "- Comece cada bloco com a referência bíblica\n"
         "- Apresente o texto do versículo logo após a referência\n"
@@ -121,6 +120,15 @@ def gerar_roteiro(titulo: str, tipo: TipoRoteiro = TipoRoteiro, referencias: lis
         "[texto do versículo]\n\n"
         "Salmos 23:1-3\n"
         "[texto dos versículos unidos]\n\n"
+
+        "POSTAGEM DA COMUNIDADE:\n"
+        "- Crie uma postagem engajante para a comunidade do YouTube\n"
+        "- Use linguagem convidativa e acolhedora\n"
+        "- Mencione o tema do vídeo de forma atrativa\n"
+        "- Inclua uma pergunta ou reflexão para gerar engajamento\n"
+        "- Use emojis apropriados para tornar a postagem mais atrativa\n"
+        "- Mantenha o tom pastoral e respeitoso\n"
+        "- Convide os espectadores a compartilhar suas reflexões\n\n"
 
         f"REFERÊNCIAS SUGERIDAS:\n{referencias_str if referencias_str else '- Use as referências mais adequadas ao tema'}"
     )

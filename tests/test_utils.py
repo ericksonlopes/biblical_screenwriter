@@ -97,10 +97,9 @@ class TestSaveRoteiroSqlite:
         assert row[3] == "Conteúdo do roteiro"  # roteiro
         assert json.loads(row[4]) == ["João 3:16", "Romanos 8:28"]  # versiculos_utilizados
         assert row[5] == "3-6 minutos"  # duracao_estimada
-        assert row[6] == "Reflexão devocional"  # formato
-        assert row[7] == "Video"  # tipo
-        assert json.loads(row[8]) == ["Salmo 23"]  # referencias
-    
+        assert row[6] == "Video"  # tipo
+        assert json.loads(row[7]) == ["Salmo 23"]  # referencias
+
     def test_save_roteiro_sqlite_multiplos_registros(self, tmp_path):
         """Testa se múltiplos roteiros são salvos com IDs incrementais."""
         db_path = tmp_path / "test_roteiros.sqlite3"
@@ -193,4 +192,4 @@ class TestSaveInfoVideoSqlite:
         table_exists = cur.fetchone() is not None
         conn.close()
         
-        assert table_exists 
+        assert table_exists

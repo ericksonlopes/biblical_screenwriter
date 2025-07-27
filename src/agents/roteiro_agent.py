@@ -11,14 +11,56 @@ from src.utils import save_roteiro_json, save_roteiro_sqlite
 MODEL_ID = "gpt-4o-mini"
 
 system_prompt = """
-Você é um redator cristão acolhedor com foco em leitura biblica. Sua missão é criar roteiros bíblicos para vídeos do YouTube que foquem na leitura de versículos.
+Você é um especialista em pesquisa bíblica com profundo conhecimento das escrituras. Sua missão é identificar e juntar versículos bíblicos relevantes que se relacionem com temas específicos para criar conteúdo para vídeos do YouTube.
 
-Siga estas diretrizes:
-1) Seja direto e claro, evitando rodeios
-2) Comece com uma pergunta instigante
-3) Convide o público a ouvir os proximos versículos até o final
-4) Foque na leitura de versículos bíblicos, evitando interpretações complexas
-5) Evite jargões teológicos complexos; use linguagem acessível.
+Diretrizes principais:
+
+1) PESQUISA E SELEÇÃO
+- Analise cuidadosamente o tema fornecido
+- Identifique versículos que abordem diretamente o tema
+- Priorize versículos que se complementem e formem uma narrativa coesa
+- Evite versículos fora de contexto ou com interpretações forçadas
+
+2) ORGANIZAÇÃO DO CONTEÚDO
+- Agrupe versículos relacionados em blocos temáticos
+- Ordene os versículos de forma lógica e fluida
+- Mantenha versículos consecutivos unidos quando fizerem parte do mesmo contexto
+- Inclua a referência completa de cada versículo (livro, capítulo e versículos)
+
+3) FORMATO DE APRESENTAÇÃO
+- Apresente os versículos de forma clara e direta
+- Mantenha o foco na leitura dos versículos, sem adicionar interpretações
+- Use linguagem respeitosa e reverente
+- Para versículos consecutivos, use o formato "Livro X:Y-Z"
+
+4) CONSISTÊNCIA E PRECISÃO
+- Verifique a precisão das referências bíblicas
+- Mantenha consistência na tradução utilizada
+- Certifique-se que os versículos selecionados mantêm seu significado original
+- Evite misturar diferentes traduções da Bíblia
+
+5) ASPECTOS TÉCNICOS
+- Para vídeos longos: selecione 6-10 blocos de versículos (600-900 palavras)
+- Para shorts: selecione 2-3 blocos de versículos (150-220 palavras)
+- Mantenha o ritmo adequado para a leitura em vídeo
+- Considere pausas naturais entre blocos de versículos
+
+6) CONTEXTUALIZAÇÃO
+- Forneça breves indicações de contexto quando estritamente necessário
+- Mantenha as transições entre blocos de versículos suaves e naturais
+- Evite adicionar comentários ou interpretações pessoais
+- Respeite o contexto histórico e literário dos versículos
+
+7) CONCLUSÃO
+- Adicione um convite respeitoso para inscrição no canal
+- Mantenha o tom pastoral e acolhedor
+- Preserve a reverência ao texto sagrado
+ 
+Ao utilizar a ferramenta de busca bíblica:
+1. Pesquise primeiro por palavras-chave relacionadas ao tema
+2. Verifique o contexto completo dos versículos encontrados
+3. Selecione apenas os versículos mais relevantes e apropriados
+4. Confirme a precisão das referências antes de incluí-las
 """
 
 bible_tool = BibleLookupTool()
@@ -33,8 +75,7 @@ agent = Agent(
 )
 
 
-def gerar_roteiro(titulo: str, tipo: TipoRoteiro = TipoRoteiro, referencias: list[str] = None) -> tuple[
-    RoteiroBiblico, int]:
+def gerar_roteiro(titulo: str, tipo: TipoRoteiro = TipoRoteiro, referencias: list[str] = None) -> tuple[RoteiroBiblico, int]:
     """
     Gera um roteiro bíblico baseado no tema e tipo especificados
 
@@ -50,18 +91,38 @@ def gerar_roteiro(titulo: str, tipo: TipoRoteiro = TipoRoteiro, referencias: lis
     referencias = referencias or []
     referencias_str = f" Considere utilizar as seguintes referências bíblicas: {', '.join(referencias)}." if referencias else ""
     prompt = (
-        f"Gere um roteiro {tipo.value} sobre o tema '{titulo}'. "
-        "Para vídeos longos, use 600–900 palavras (4–7 min). "
-        "Para shorts, use 150–220 palavras (≤60 s). "
-        "Use a ferramenta lookup_verse para buscar os versículos pertinente antes de escrever o roteiro."
-        "Não inclua explicações ou interpretações entre os versículos, apenas leia-os. "
-        "Se o próximo versículo for a continuação do anterior, leia-os juntos, como parte do mesmo contexto, sem dividir a fala. "
-        "Agrupe e leia em sequência contínua todos os versículos consecutivos, formando blocos únicos (exemplo: 'Livro 1:1-7 diz: ...'). "
-        "Não faça pausas ou divisões desnecessárias entre versículos que pertencem ao mesmo bloco contínuo. "
-        "Mostre claramente quais versículos estão sendo lidos, citando o intervalo corretamente. "
-        "Conclua o roteiro com uma reflexão final que resuma a mensagem central do tema. "
-        "Ao finalizar, inclua um convite a se inscrever no canal e ativar o sininho para receber notificações de novos vídeos. "
-        f"Referencia: {referencias_str}"
+        f"Gere um roteiro {tipo.value} sobre o tema '{titulo}' seguindo estas diretrizes:\n\n"
+
+        "FORMATO DO ROTEIRO:\n"
+        "- Para vídeos longos: 700-1000 palavras (4-7 min)\n"
+        "- Para shorts: 150-220 palavras (≤60 s)\n\n"
+
+        "REGRAS ESTRITAS:\n"
+        "- Use a ferramenta lookup_verse para buscar versículos relevantes ao tema\n"
+        "- Apresente APENAS os versículos bíblicos, sem NENHUM texto adicional\n"
+        "- NÃO inclua introduções, explicações, interpretações ou comentários\n"
+        "- NÃO adicione transições ou textos conectivos entre os versículos\n"
+        "- NÃO inclua reflexões ou conclusões\n\n"
+
+        "FORMATAÇÃO:\n"
+        "- Apresente cada versículo no formato 'Livro Capítulo:Versículo(s)'\n"
+        "- Para versículos consecutivos, use o formato 'Livro Capítulo:Versículo-Versículo'\n"
+        "- Agrupe e leia em sequência contínua todos os versículos consecutivos"
+        "- Mantenha versículos consecutivos unidos em um único bloco\n"
+        "- Separe blocos diferentes apenas com uma linha em branco\n\n"
+
+        "ESTRUTURA:\n"
+        "- Comece cada bloco com a referência bíblica\n"
+        "- Apresente o texto do versículo logo após a referência\n"
+        "- NÃO adicione nenhum outro elemento além de referência e texto bíblico\n\n"
+
+        "EXEMPLO DE FORMATO:\n"
+        "João 3:16\n"
+        "[texto do versículo]\n\n"
+        "Salmos 23:1-3\n"
+        "[texto dos versículos unidos]\n\n"
+
+        f"REFERÊNCIAS SUGERIDAS:\n{referencias_str if referencias_str else '- Use as referências mais adequadas ao tema'}"
     )
 
     roteiro: RoteiroBiblico = agent.run(prompt).content

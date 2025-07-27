@@ -41,7 +41,6 @@ class TestRoteiroBiblico:
         assert len(roteiro.versiculos_utilizados) == 2
         assert roteiro.duracao_estimada == "3-6 minutos"
         assert roteiro.tipo == TipoRoteiro.LONGO
-        assert roteiro.formato == "Reflexão devocional"
         assert isinstance(roteiro.data_criacao, datetime)
     
     def test_roteiro_biblico_valores_padrao(self):
@@ -54,7 +53,6 @@ class TestRoteiroBiblico:
             tipo=TipoRoteiro.SHORT
         )
         
-        assert roteiro.formato == "Reflexão devocional"
         assert roteiro.referencias == []
         assert isinstance(roteiro.data_criacao, datetime)
     
@@ -144,4 +142,4 @@ class TestDetailVideoYouTube:
         # Testa model_dump_json
         json_str = info_video.model_dump_json()
         assert "Título do Vídeo" in json_str
-        assert "tag1" in json_str 
+        assert "tag1" in json_str

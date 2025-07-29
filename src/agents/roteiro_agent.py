@@ -94,8 +94,7 @@ def gerar_roteiro(titulo: str, tipo: TipoRoteiro = TipoRoteiro, referencias: lis
         f"Gere um roteiro {tipo.value} sobre o tema '{titulo}' seguindo estas diretrizes:\n\n"
 
         "FORMATO DO ROTEIRO:\n"
-        "- Para vídeos longos: 2000-4000 palavras \n"
-        "- Para shorts: 150-220 palavras (≤60 s)\n\n"
+        "- Para vídeos longos: maior que 2000 e menor que3000 palavras \n"
         
         "FORMATAÇÃO:\n"
         "- Apresente cada versículo no formato 'Livro Capítulo:Versículo(s)'\n"

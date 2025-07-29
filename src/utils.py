@@ -50,22 +50,20 @@ def save_roteiro_sqlite(roteiro: RoteiroBiblico, db_path: str = None) -> int:
                     data_criacao          TEXT,
                     roteiro               TEXT,
                     versiculos_utilizados TEXT,
-                    duracao_estimada      TEXT,
                     tipo                  TEXT,
                     referencias           TEXT,
                     postagem_comunidade   TEXT
                 )
                 ''')
     cur.execute('''
-                INSERT INTO roteiros_biblicos (tema, data_criacao, roteiro, versiculos_utilizados, duracao_estimada,
+                INSERT INTO roteiros_biblicos (tema, data_criacao, roteiro, versiculos_utilizados,
                                                tipo, referencias, postagem_comunidade)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
                 ''', (
                     roteiro.tema,
                     roteiro.data_criacao.isoformat(),
                     roteiro.roteiro,
                     json.dumps(roteiro.versiculos_utilizados, ensure_ascii=False),
-                    roteiro.duracao_estimada,
                     roteiro.tipo.value if hasattr(roteiro.tipo, 'value') else str(roteiro.tipo),
                     json.dumps(roteiro.referencias, ensure_ascii=False),
                     roteiro.postagem_comunidade

@@ -32,14 +32,12 @@ class TestRoteiroBiblico:
             tema="Ansiedade",
             roteiro="Este é um roteiro de teste sobre ansiedade...",
             versiculos_utilizados=["Filipenses 4:6-7", "Mateus 6:25-34"],
-            duracao_estimada="3-6 minutos",
             tipo=TipoRoteiro.LONGO
         )
 
         assert roteiro.tema == "Ansiedade"
         assert roteiro.roteiro == "Este é um roteiro de teste sobre ansiedade..."
         assert len(roteiro.versiculos_utilizados) == 2
-        assert roteiro.duracao_estimada == "3-6 minutos"
         assert roteiro.tipo == TipoRoteiro.LONGO
         assert isinstance(roteiro.data_criacao, datetime)
 
@@ -49,7 +47,6 @@ class TestRoteiroBiblico:
             tema="Teste",
             roteiro="Roteiro de teste",
             versiculos_utilizados=["João 3:16"],
-            duracao_estimada="≤60 segundos",
             tipo=TipoRoteiro.SHORT
         )
 
@@ -64,7 +61,6 @@ class TestRoteiroBiblico:
             tema="Conforto",
             roteiro="Roteiro sobre conforto...",
             versiculos_utilizados=["Salmo 23:1-6"],
-            duracao_estimada="3-6 minutos",
             tipo=TipoRoteiro.LONGO,
             referencias=referencias
         )
@@ -78,7 +74,6 @@ class TestRoteiroBiblico:
             tema="Conforto",
             roteiro="Roteiro sobre conforto...",
             versiculos_utilizados=["Salmo 23:1-6"],
-            duracao_estimada="3-6 minutos",
             tipo=TipoRoteiro.LONGO,
             postagem_comunidade=postagem
         )
@@ -91,7 +86,6 @@ class TestRoteiroBiblico:
             tema="Teste",
             roteiro="Roteiro de teste",
             versiculos_utilizados=["João 3:16"],
-            duracao_estimada="3-6 minutos",
             tipo=TipoRoteiro.LONGO
         )
 

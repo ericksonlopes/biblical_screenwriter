@@ -48,7 +48,6 @@ def gerar_detail_video_youtube(roteiro: RoteiroBiblico, roteiro_id: int = None) 
 
     TEMA: {roteiro.tema}
     TIPO: {roteiro.tipo.value}
-    DURAÇÃO: {roteiro.duracao_estimada}
     VERSÍCULOS: {', '.join(roteiro.versiculos_utilizados)}
     
     ROTEIRO:

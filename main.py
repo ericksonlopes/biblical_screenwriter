@@ -9,7 +9,7 @@ load_dotenv()
 
 if __name__ == "__main__":
     # Gerar roteiro bíblico
-    roteiro, roteiro_id = gerar_roteiro("fujam da imoralidade sexual", TipoRoteiro.LONGO)
+    roteiro, roteiro_id = gerar_roteiro("Perdoem uns aos outros... 70x7", TipoRoteiro.LONGO)
 
     # Gerar informações do vídeo para YouTube
     info_video = gerar_detail_video_youtube(roteiro, roteiro_id)
@@ -18,7 +18,6 @@ if __name__ == "__main__":
     print(f"ID: {roteiro_id}")
     print(f"Tema: {roteiro.tema}")
     print(f"Tipo: {roteiro.tipo}")
-    print(f"Duração: {roteiro.duracao_estimada}")
 
     print(f"\n=== INFORMAÇÕES DO VÍDEO ===")
     print(f"Título: {info_video.titulo}")

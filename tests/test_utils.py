@@ -20,7 +20,6 @@ class TestSaveRoteiroJson:
                 tema="Teste",
                 roteiro="Conteúdo do roteiro de teste",
                 versiculos_utilizados=["João 3:16"],
-                duracao_estimada="3-6 minutos",
                 tipo=TipoRoteiro.LONGO
             )
 
@@ -46,7 +45,6 @@ class TestSaveRoteiroJson:
                 tema="Ansiedade e Fé",
                 roteiro="Conteúdo",
                 versiculos_utilizados=["Filipenses 4:6"],
-                duracao_estimada="3-6 minutos",
                 tipo=TipoRoteiro.LONGO
             )
 
@@ -69,7 +67,6 @@ class TestSaveRoteiroSqlite:
             tema="Teste SQLite",
             roteiro="Conteúdo do roteiro",
             versiculos_utilizados=["João 3:16", "Romanos 8:28"],
-            duracao_estimada="3-6 minutos",
             tipo=TipoRoteiro.LONGO,
             referencias=["Salmo 23"],
             postagem_comunidade="🙏 Acabei de publicar um vídeo sobre ansiedade! Como você lida com momentos de preocupação? Compartilhe suas estratégias nos comentários! ✨"
@@ -92,11 +89,10 @@ class TestSaveRoteiroSqlite:
         assert row[1] == "Teste SQLite"  # tema
         assert row[3] == "Conteúdo do roteiro"  # roteiro
         assert json.loads(row[4]) == ["João 3:16", "Romanos 8:28"]  # versiculos_utilizados
-        assert row[5] == "3-6 minutos"  # duracao_estimada
-        assert row[6] == "Video"  # tipo
-        assert json.loads(row[7]) == ["Salmo 23"]  # referencias
+        assert row[5] == "Video"  # tipo
+        assert json.loads(row[6]) == ["Salmo 23"]  # referencias
         assert row[
-                   8] == "🙏 Acabei de publicar um vídeo sobre ansiedade! Como você lida com momentos de preocupação? Compartilhe suas estratégias nos comentários! ✨"  # postagem_comunidade
+                   7] == "🙏 Acabei de publicar um vídeo sobre ansiedade! Como você lida com momentos de preocupação? Compartilhe suas estratégias nos comentários! ✨"  # postagem_comunidade
 
     def test_save_roteiro_sqlite_multiplos_registros(self, tmp_path):
         """Testa se múltiplos roteiros são salvos com IDs incrementais."""
@@ -106,7 +102,6 @@ class TestSaveRoteiroSqlite:
             tema="Primeiro Roteiro",
             roteiro="Conteúdo 1",
             versiculos_utilizados=["João 3:16"],
-            duracao_estimada="3-6 minutos",
             tipo=TipoRoteiro.LONGO
         )
 
@@ -114,7 +109,6 @@ class TestSaveRoteiroSqlite:
             tema="Segundo Roteiro",
             roteiro="Conteúdo 2",
             versiculos_utilizados=["Romanos 8:28"],
-            duracao_estimada="≤60 segundos",
             tipo=TipoRoteiro.SHORT
         )
 
@@ -137,7 +131,6 @@ class TestSaveInfoVideoSqlite:
             tema="Teste",
             roteiro="Conteúdo",
             versiculos_utilizados=["João 3:16"],
-            duracao_estimada="3-6 minutos",
             tipo=TipoRoteiro.LONGO
         )
         roteiro_id = save_roteiro_sqlite(roteiro, str(db_path))

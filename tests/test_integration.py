@@ -26,7 +26,6 @@ class TestFluxoCompleto:
             tema="Ansiedade",
             roteiro="Este é um roteiro completo sobre ansiedade. Vamos ler Filipenses 4:6-7...",
             versiculos_utilizados=["Filipenses 4:6-7", "Mateus 6:25-34"],
-            duracao_estimada="3-6 minutos",
             tipo=TipoRoteiro.LONGO,
             referencias=["Salmo 23"]
         )
@@ -52,7 +51,6 @@ class TestFluxoCompleto:
         # Verifica o roteiro gerado
         assert roteiro.tema == "Ansiedade"
         assert roteiro.tipo == TipoRoteiro.LONGO
-        assert roteiro.duracao_estimada == "3-6 minutos"
         assert roteiro.referencias == ["Salmo 23"]
         assert len(roteiro.versiculos_utilizados) == 2
         assert roteiro_id == 123
@@ -85,7 +83,6 @@ class TestFluxoCompleto:
             tema="Gratidão",
             roteiro="Roteiro curto sobre gratidão. 1 Tessalonicenses 5:18...",
             versiculos_utilizados=["1 Tessalonicenses 5:18"],
-            duracao_estimada="≤60 segundos",
             tipo=TipoRoteiro.SHORT
         )
         mock_roteiro_agent.run.return_value = roteiro_response
@@ -110,7 +107,6 @@ class TestFluxoCompleto:
         # Verifica o roteiro gerado
         assert roteiro.tema == "Gratidão"
         assert roteiro.tipo == TipoRoteiro.SHORT
-        assert roteiro.duracao_estimada == "≤60 segundos"
         assert roteiro_id == 456
 
         # Verifica as informações do vídeo
@@ -144,7 +140,6 @@ class TestIntegracaoComMain:
             tema="Ansiedade",
             roteiro="Este é um roteiro sobre ansiedade. Vamos ler Filipenses 4:6-7...",
             versiculos_utilizados=["Filipenses 4:6-7"],
-            duracao_estimada="3-6 minutos",
             tipo=TipoRoteiro.LONGO
         )
         mock_roteiro_agent.run.return_value = roteiro_response
@@ -170,7 +165,6 @@ class TestIntegracaoComMain:
         assert roteiro_id == 789
         assert roteiro.tema == "Ansiedade"
         assert roteiro.tipo == TipoRoteiro.LONGO
-        assert roteiro.duracao_estimada == "3-6 minutos"
 
         assert info_video.titulo == "Como Vencer a Ansiedade - Reflexão Bíblica"
         assert len(info_video.tags) > 0
@@ -195,7 +189,6 @@ class TestValidacaoDados:
             tema="Esperança",
             roteiro="Roteiro sobre esperança...",
             versiculos_utilizados=["Romanos 15:13"],
-            duracao_estimada="3-6 minutos",
             tipo=TipoRoteiro.LONGO
         )
         mock_roteiro_agent.run.return_value = roteiro_response
@@ -219,7 +212,6 @@ class TestValidacaoDados:
         assert isinstance(roteiro.tema, str) and len(roteiro.tema) > 0
         assert isinstance(roteiro.roteiro, str) and len(roteiro.roteiro) > 0
         assert isinstance(roteiro.versiculos_utilizados, list) and len(roteiro.versiculos_utilizados) > 0
-        assert isinstance(roteiro.duracao_estimada, str) and len(roteiro.duracao_estimada) > 0
         assert roteiro.tipo in [TipoRoteiro.LONGO, TipoRoteiro.SHORT]
         assert isinstance(roteiro_id, int) and roteiro_id > 0
 

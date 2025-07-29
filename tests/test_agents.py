@@ -74,7 +74,6 @@ class TestRoteiroAgent:
         # Verifica se o prompt inclui instruções para shorts
         call_args = mock_agent.run.call_args[0][0]
         assert "Short" in call_args
-        assert "≤60 s" in call_args
 
         assert roteiro.tipo == TipoRoteiro.SHORT
         assert roteiro_id == 789
@@ -105,7 +104,6 @@ class TestYouTubeDetailAgent:
         call_args = mock_agent.run.call_args[0][0]
         assert sample_roteiro.tema in call_args
         assert sample_roteiro.tipo.value in call_args
-        assert sample_roteiro.duracao_estimada in call_args
 
         # Verifica se a função de salvamento foi chamada
         mock_save_sqlite.assert_called_once_with(sample_detail_video, 123)
@@ -153,7 +151,6 @@ class TestYouTubeDetailAgent:
         # Verifica se todas as informações do roteiro estão no prompt
         assert sample_roteiro.tema in call_args
         assert sample_roteiro.tipo.value in call_args
-        assert sample_roteiro.duracao_estimada in call_args
         assert sample_roteiro.roteiro in call_args
 
         # Verifica se os versículos estão no prompt

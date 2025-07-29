@@ -16,7 +16,6 @@ def sample_roteiro():
         tema="Ansiedade",
         roteiro="Este é um roteiro de teste sobre ansiedade. Vamos ler Filipenses 4:6-7...",
         versiculos_utilizados=["Filipenses 4:6-7", "Mateus 6:25-34"],
-        duracao_estimada="3-6 minutos",
         tipo=TipoRoteiro.LONGO,
         referencias=["Salmo 23", "Isaías 41:10"],
         postagem_comunidade="🙏 Acabei de publicar um vídeo sobre ansiedade! Como você lida com momentos de preocupação? Compartilhe suas estratégias nos comentários! ✨"
@@ -30,7 +29,6 @@ def sample_short_roteiro():
         tema="Gratidão",
         roteiro="Roteiro curto sobre gratidão. 1 Tessalonicenses 5:18...",
         versiculos_utilizados=["1 Tessalonicenses 5:18"],
-        duracao_estimada="≤60 segundos",
         tipo=TipoRoteiro.SHORT,
         postagem_comunidade="🙏 Short sobre gratidão! Pelo que você é grato hoje? Deixe nos comentários! ✨"
     )

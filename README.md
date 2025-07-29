@@ -190,7 +190,6 @@ Para mais detalhes, consulte [tests/README.md](tests/README.md).
     "tema": "Ansiedade",
     "roteiro": "Texto completo do roteiro...",
     "versiculos_utilizados": ["Filipenses 4:6-7", "1 Pedro 5:7"],
-    "duracao_estimada": "4-7 minutos",
     "tipo": "Video",  # ou "Short"
     "referencias": ["Salmo 23", "Isaías 41:10"],
     "postagem_comunidade": "🙏 Acabei de publicar um vídeo sobre ansiedade! Como você lida com momentos de preocupação? Compartilhe suas estratégias nos comentários! ✨"
@@ -258,7 +257,6 @@ As postagens são geradas automaticamente junto com o roteiro e podem ser acessa
 ID: 1
 Tema: Ansiedade
 Tipo: Video
-Duração: 4-7 minutos
 
 === INFORMAÇÕES DO VÍDEO ===
 Título: 😰 Ansiedade? A Bíblia tem a resposta que você precisa!

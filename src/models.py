@@ -14,7 +14,6 @@ class RoteiroBiblico(BaseModel):
     data_criacao: datetime = Field(default_factory=datetime.now, description="Data de criação do roteiro")
     roteiro: str = Field(..., description="Texto integral do roteiro")
     versiculos_utilizados: list[str] = Field(..., description="Referências bíblicas usadas")
-    duracao_estimada: str = Field(..., description="Ex.: '3–6 minutos' ou '≤60 segundos'")
     tipo: TipoRoteiro
     referencias: list[str] = Field(default_factory=list, description="Referências sugeridas para o agente usar")
     postagem_comunidade: str = Field(

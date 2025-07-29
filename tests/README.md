@@ -151,7 +151,6 @@ def test_roteiro_biblico_com_postagem_comunidade(self):
         tema="Conforto",
         roteiro="Roteiro sobre conforto...",
         versiculos_utilizados=["Salmo 23:1-6"],
-        duracao_estimada="3-6 minutos",
         tipo=TipoRoteiro.LONGO,
         postagem_comunidade=postagem
     )
@@ -168,7 +167,6 @@ def test_roteiro_biblico_valores_padrao(self):
         tema="Teste",
         roteiro="Roteiro de teste",
         versiculos_utilizados=["João 3:16"],
-        duracao_estimada="≤60 segundos",
         tipo=TipoRoteiro.SHORT
     )
     

@@ -1,15 +1,16 @@
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
+
 
 from src.agents.roteiro_agent import gerar_roteiro
 from src.agents.youtube_detail_agent import gerar_detail_video_youtube
 from src.models import TipoRoteiro
 
 # Carregar variáveis de ambiente do arquivo .env
-load_dotenv()
+load_dotenv(find_dotenv())
 
 if __name__ == "__main__":
     # Gerar roteiro bíblico
-    roteiro, roteiro_id = gerar_roteiro("Perdoem uns aos outros... 70x7", TipoRoteiro.LONGO)
+    roteiro, roteiro_id = gerar_roteiro("Deus não espera que você volte perfeito, ele só quer que você volte", TipoRoteiro.LONGO)
 
     # Gerar informações do vídeo para YouTube
     info_video = gerar_detail_video_youtube(roteiro, roteiro_id)

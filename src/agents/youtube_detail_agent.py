@@ -1,5 +1,8 @@
+import os
+
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
+from agno.storage.sqlite import SqliteStorage
 from loguru import logger
 
 from src.models import DetailVideoYouTube, RoteiroBiblico
@@ -25,8 +28,12 @@ agent = Agent(
     model=OpenAIChat(id=MODEL_ID, temperature=0.7),
     description="Agente gerador de informações para vídeos do YouTube",
     response_model=DetailVideoYouTube,
-    instructions=[system_prompt],
-    show_tool_calls=False
+    storage=SqliteStorage(
+        table_name="youtube_video_details_sessions",
+        db_file=f"{os.environ.get('DB_NAME', 'roteiros')}.sqlite3",
+        auto_upgrade_schema=True
+    ),
+    instructions=[system_prompt]
 )
 
 

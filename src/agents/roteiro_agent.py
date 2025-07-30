@@ -1,7 +1,9 @@
+import os
 from datetime import datetime
 
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
+from agno.storage.sqlite import SqliteStorage
 from loguru import logger
 
 from src.bible_tool import BibleLookupTool
@@ -70,12 +72,18 @@ agent = Agent(
     description="Agente gerador de roteiros bíblicos para YouTube",
     tools=[bible_tool],
     response_model=RoteiroBiblico,
+    storage=SqliteStorage(
+        table_name="roteiros_sessions",
+        db_file=f"{os.environ.get('DB_NAME', 'roteiros')}.sqlite3",
+        auto_upgrade_schema=True
+    ),
     instructions=[system_prompt],
     show_tool_calls=False
 )
 
 
-def gerar_roteiro(titulo: str, tipo: TipoRoteiro = TipoRoteiro, referencias: list[str] = None) -> tuple[RoteiroBiblico, int]:
+def gerar_roteiro(titulo: str, tipo: TipoRoteiro = TipoRoteiro, referencias: list[str] = None) -> tuple[
+    RoteiroBiblico, int]:
     """
     Gera um roteiro bíblico baseado no tema e tipo especificados
 
@@ -95,20 +103,20 @@ def gerar_roteiro(titulo: str, tipo: TipoRoteiro = TipoRoteiro, referencias: lis
 
         "FORMATO DO ROTEIRO:\n"
         "- Para vídeos longos: maior que 2000 e menor que3000 palavras \n"
-        
+
         "FORMATAÇÃO:\n"
         "- Apresente cada versículo no formato 'Livro Capítulo:Versículo(s)'\n"
         "- Para versículos consecutivos, use o formato 'Livro Capítulo:Versículo-Versículo'\n"
         "- Agrupe e leia em sequência contínua todos os versículos consecutivos"
         "- Mantenha versículos consecutivos unidos em um único bloco - Esta é uma regra fundamental\n"
         "- Separe blocos diferentes apenas com uma linha em branco\n\n"
-        
+
         "REGRAS ESTRITAS:\n"
         "- Use a ferramenta lookup_verse para buscar versículos relevantes ao tema\n"
         "- Apresente APENAS os versículos bíblicos, sem NENHUM texto adicional\n"
         "- NÃO inclua introduções, explicações, interpretações ou comentários\n"
         "- NÃO adicione transições ou textos conectivos entre os versículos\n"
-        
+
         "ESTRUTURA:\n"
         "- Comece cada bloco com a referência bíblica\n"
         "- Apresente o texto do versículo logo após a referência\n"

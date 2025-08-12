@@ -144,8 +144,9 @@ def gerar_roteiro(titulo: str, tipo: TipoRoteiro = TipoRoteiro, referencias: lis
     roteiro.referencias = referencias
     roteiro.tema = titulo  # Garantir que o tema seja definido corretamente
     logger.debug(f"Roteiro gerado: {roteiro}")
-    path = save_roteiro_json(roteiro)
     roteiro.data_criacao = datetime.now()
     roteiro_id = save_roteiro_sqlite(roteiro)
+
+    path = save_roteiro_json(roteiro)
     logger.success(f"Roteiro salvo em {path} e no banco SQLite com ID {roteiro_id}")
     return roteiro, roteiro_id

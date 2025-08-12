@@ -92,7 +92,7 @@ class BibleLookupTool(Toolkit):
     def _parse_ref(cls, ref: str) -> tuple[str, str, Optional[int], Optional[int]]:
         """
         Separa slug, capítulo, 1º e 2º versículo (ou None).
-        Aceita espaço opcional: 'rm 5:5-7' ou 'rm5:5-7'.
+        'rm 5:5-7' ou 'gn 1:5-7'.
         """
         s = ref.lower().replace(" ", "")
         m = re.fullmatch(r"([1-3]?[a-z]{1,3})([0-9]+)(?::([0-9]+)(?:-([0-9]+))?)?", s)
